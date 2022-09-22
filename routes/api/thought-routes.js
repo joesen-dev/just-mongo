@@ -3,19 +3,18 @@ const {
   getAllThoughts,
   getThoughtById,
   createThought,
+  updateThought,
+  removeThought,
 } = require("../../controllers/thought-controller");
 
-// Set up GET all thoughts
+// /api/thoughts -> GET all thoughts
 router.route("/").get(getAllThoughts);
-// /api/thoughts/<userId>
+// /api/thoughts/:id -> GET thought by Id
+router.route("/:id").get(getThoughtById);
+// /api/thoughts/:userId -> POST create thought
 router.route("/:userId").post(createThought);
 
-// /api/comments/<userId>/<thoughtId>
-// router.route("/:userId/:thoughtId").put(addReply).delete(removeComment);
-router.route("/:id").get(getThoughtById);
-// .put(updateUser).delete(deleteUser);
-
-// TODO: PUT to update a thought by its _id
-// TODO: DELETE to remove a thought by its _id
+// /api/thoughts/<userId>/<thoughtId> -> PUT to update a thought
+router.route("/:userId/:thoughtId").put(updateThought).delete(removeThought);
 
 module.exports = router;

@@ -32,7 +32,7 @@ const thoughtController = {
 
   // create a new user
   createThought({ params, body }, res) {
-    console.log(body);
+    // console.log(body);
     Thought.create(body)
       .then(({ _id }) => {
         return User.findOneAndUpdate(
@@ -52,29 +52,32 @@ const thoughtController = {
       .catch((err) => res.json(err));
   },
 
-  //   // update a thought by its _id
-  //   updateThought({ params, body }, res) {
-  //     Thought.findOneAndUpdate(
-  //       { _id: params.thoughtId },
-  //       { $push: { replies: body } }
-  //       //   {
-  //       //     new: true,
-  //       //     // runValidators: true - include this explicit setting when updating data so that it knows to validate any new information
-  //       //     runValidators: true,
-  //       //   }
-  //     )
-  //       .then((dbPizzaData) => {
-  //         if (!dbPizzaData) {
-  //           res.status(404).json({ message: "No reply found with this id!" });
-  //           return;
-  //         }
-  //         res.json(dbPizzaData);
-  //       })
-  //       .catch((err) => res.json(err));
-  //   },
+  // update a thought by its _id
+  updateThought({ params, body }, res) {
+    Thought.findOneAndUpdate({ _id: params.thoughtId }, body, {
+      new: true,
+    })
+      .then((dbThoughtData) => {
+        if (!dbThoughtData) {
+          res.status(404).json({ message: "No thought found with this id!" });
+          return;
+        }
+        res.json(dbThoughtData);
+      })
+      .catch((err) => res.json(err));
+  },
 
-  //   // delete a thought
-  //   removeComment() {},
+  // delete a thought
+  removeThought({ params }, res) {
+    Thought.findOneAndDelete({ _id: params.thoughtId })
+      .then((deletedThought) => {
+        if (!deletedThought) {
+          return res.status(404).json({ message: "No thought with this id!" });
+        }
+        res.json(deletedThought);
+      })
+      .catch((err) => res.json(err));
+  },
 };
 
 module.exports = thoughtController;

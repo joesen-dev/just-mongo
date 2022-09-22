@@ -8,7 +8,7 @@ const {
 } = require("../../controllers/user-controller");
 
 /*
- * @Note: The following variations achieve the same goal
+ * Note: The following variations achieve the same goal
  ** this code:
  **  -> router.route('/').get(getCallbackFunction).post(postCallbackFunction);
 
