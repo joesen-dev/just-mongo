@@ -32,17 +32,20 @@ const thoughtController = {
 
   // create a new user
   createThought({ params, body }, res) {
-    // console.log(body);
+    console.log("body");
+    console.log(body);
     Thought.create(body)
       .then(({ _id }) => {
         return User.findOneAndUpdate(
           { _id: params.userId },
           // push the created thought's _id to the associated user's thoughts array field
-          { $push: { thought: _id } },
+          { $push: { thoughts: _id } },
           { new: true }
         );
       })
       .then((dbThoughtData) => {
+        console.log("dbThoughtData");
+        console.log(dbThoughtData);
         if (!dbThoughtData) {
           res.status(404).send({ message: "User not found" });
           return;
