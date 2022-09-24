@@ -15,20 +15,20 @@ const UserSchema = new Schema({
     // must be a valid email address (look into Mongoose's matching validation)
     match: [/.+@.+\..+/],
   },
-  // thoughts: [
-  //   // Array of _id values referencing the Thought model
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "Thought",
-  //   },
-  // ],
-  // friends: [
-  //   // Array of _id values referencing the User model (self-reference)
-  //   {
-  //     type: Schema.Types.ObjectId,
-  //     ref: "User",
-  //   },
-  // ],
+  thoughts: [
+    // Array of _id values referencing the Thought model
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Thought",
+    },
+  ],
+  friends: [
+    // Array of _id values referencing the User model (self-reference)
+    {
+      type: Schema.Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 // Schema Settings
 // Create a virtual called friendCount that retrieves the length of the user's friends array field on query.
