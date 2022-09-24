@@ -3,10 +3,10 @@ const {
   getAllUsers,
   getUserById,
   createUser,
-  // addFriend,
+  addFriend,
   updateUser,
   deleteUser,
-  // removeFriend,
+  removeFriend,
 } = require("../../controllers/user-controller");
 
 /*
@@ -22,7 +22,7 @@ const {
 // Set up GET all and POST at /api/user
 router.route("/").get(getAllUsers).post(createUser);
 // /api/users/:userId/friends/:friendId
-// router.route("/:userId/friends/:friendId").post(addFriend).delete(removeFriend);
+router.route("/:userId/friends/:friendId").post(addFriend).delete(removeFriend);
 // Set up GET one, PUT, and DELETE at /api/users/:id
 router.route("/:id").get(getUserById).put(updateUser).delete(deleteUser);
 
