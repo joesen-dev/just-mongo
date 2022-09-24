@@ -30,7 +30,7 @@ const thoughtController = {
       });
   },
 
-  // create a new user
+  // create a new thought
   createThought({ params, body }, res) {
     console.log("body");
     console.log(body);
@@ -80,6 +80,12 @@ const thoughtController = {
         res.json(deletedThought);
       })
       .catch((err) => res.json(err));
+  },
+
+  // create a new reaction
+  createThought({ params, body }, res) {
+    console.log("body");
+    console.log(body);
   },
 };
 

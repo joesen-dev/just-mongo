@@ -122,7 +122,6 @@ const userController = {
       })
       .catch((err) => res.json(err));
   },
-  // TODO: this route is not working properly
   removeFriend({ params }, res) {
     console.log("params");
     console.log(params);

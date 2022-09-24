@@ -13,8 +13,10 @@ router.route("/").get(getAllThoughts);
 router.route("/:id").get(getThoughtById);
 // /api/thoughts/:userId -> POST create thought
 router.route("/:userId").post(createThought);
-
-// /api/thoughts/<userId>/<thoughtId> -> PUT to update a thought
+// /api/thoughts/<userId>/<thoughtId> -> PUT/Delete to update/delete a thought
 router.route("/:userId/:thoughtId").put(updateThought).delete(removeThought);
+
+// /api/thoughts/:thoughtId/reactions -> POST/DELETE to create/delete a reaction
+router.route("/:thoughtId/reactions").post().delete();
 
 module.exports = router;
