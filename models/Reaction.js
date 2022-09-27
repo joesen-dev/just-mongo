@@ -1,5 +1,6 @@
-// import mongoose dependencies
+// import dependencies
 const { Schema, model, Types } = require("mongoose");
+const dateFormat = require("../utils/dateFormat");
 
 const reactionSchema = new Schema(
   {
@@ -20,8 +21,7 @@ const reactionSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // TODO: Use a JavaScript data library to format timestamps
-      // TODO: Use a getter method to format the timestamp on query
+      get: (createdAtVal) => dateFormat(createdAtVal),
     },
   },
   {

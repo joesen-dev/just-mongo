@@ -1,6 +1,7 @@
-// import mongoose dependencies
+// import dependencies
 const { Schema, model } = require("mongoose");
 const reactionSchema = require("./Reaction");
+const dateFormat = require("../utils/dateFormat");
 
 const ThoughtSchema = new Schema(
   {
@@ -13,8 +14,7 @@ const ThoughtSchema = new Schema(
     createdAt: {
       type: Date,
       default: Date.now,
-      // TODO: Use a JavaScript data library to format timestamps
-      // TODO: Use a getter method to format the timestamp on query
+      get: (createdAtVal) => dateFormat(createdAtVal),
     },
     username: {
       type: String,
@@ -25,6 +25,7 @@ const ThoughtSchema = new Schema(
   {
     toJSON: {
       virtuals: true,
+      getters: true,
     },
     id: false,
   }
