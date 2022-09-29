@@ -6,7 +6,6 @@ const thoughtController = {
     Thought.find({})
       .then((dbThoughtData) => res.json(dbThoughtData))
       .catch((err) => {
-        console.log(err);
         res.status(400).json(err);
       });
   },
@@ -25,15 +24,12 @@ const thoughtController = {
         res.json(dbThoughtData);
       })
       .catch((err) => {
-        console.log(err);
         res.status(400).json(err);
       });
   },
 
   // create a new thought
   createThought({ params, body }, res) {
-    console.log("body");
-    console.log(body);
     Thought.create(body)
       .then(({ _id }) => {
         return User.findOneAndUpdate(
@@ -44,8 +40,6 @@ const thoughtController = {
         );
       })
       .then((dbThoughtData) => {
-        console.log("dbThoughtData");
-        console.log(dbThoughtData);
         if (!dbThoughtData) {
           res.status(404).send({ message: "User not found" });
           return;
@@ -84,16 +78,12 @@ const thoughtController = {
 
   // create a new reaction
   createReaction({ params, body }, res) {
-    console.log("body");
-    console.log(body);
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
       { $push: { reactions: body } },
       { new: true, runValidators: true }
     )
       .then((dbThoughtData) => {
-        console.log("dbThoughtData");
-        console.log(dbThoughtData);
         if (!dbThoughtData) {
           res.status(404).json({ message: "No thought found" });
           return;
@@ -101,7 +91,6 @@ const thoughtController = {
         res.json(dbThoughtData);
       })
       .catch((err) => {
-        console.log(err);
         res.status(400).json(err);
       });
   },
@@ -120,7 +109,6 @@ const thoughtController = {
         res.json(dbThoughtData);
       })
       .catch((err) => {
-        console.log(err);
         res.status(400).json(err);
       });
   },
